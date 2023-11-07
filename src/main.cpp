@@ -15,6 +15,7 @@ int MAX_CAP=numtickets;
 int numbsold=0;
 mutex m;
 mutex m_cout;
+
 theatre t1(MAX_CAP/2);
 theatre t2(MAX_CAP/2);
 
@@ -25,7 +26,7 @@ void agent(int id){
 }
 
 
-int main() {
+int onerun() {
 	std::vector<std::thread> vecThreads;
 
 	//how many cores (2 virtual cores per physical core)
@@ -43,6 +44,19 @@ int main() {
 
 	cout<<"Numb tickets left="<<numtickets<<endl;
 	cout<<"Numb tickets sold="<<numbsold<<endl;
+
 	cout<<"Theatre t1 contains="<<t1.howmanypeopleinside()<<endl;
+	cout<<"Theatre t2 contains="<<t2.howmanypeopleinside()<<endl;
 	return 0;
+}
+
+int main(){
+	for(int i=0;i<1000;i++){
+		numtickets=NUM_TICKS;
+		MAX_CAP=numtickets;
+		numbsold=0;
+		t1.empty();
+		t2.empty();
+		onerun();
+	}
 }

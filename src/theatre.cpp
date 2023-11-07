@@ -10,11 +10,11 @@ theatre::theatre(int cap):cap(cap),num_people_in_theatre(0) {
 }
 
 
-//m serves as the doorman
+//mtheatre serves as the doorman
 bool theatre::enter(){
-	std::lock_guard<std::mutex> lck(m);
+	std::lock_guard<std::mutex> lck(mtheatre);
 	//if full cannot go in
-	if(num_people_in_theatre==cap)
+	if(howmanypeopleinside()==cap)
 		return false;
 
 	//otherwise enter
@@ -23,7 +23,7 @@ bool theatre::enter(){
 }
 
 int theatre::howmanypeopleinside(){
-	std::lock_guard<std::mutex> lck(m);
+	std::lock_guard<std::mutex> lck(mtheatre);
 	return num_people_in_theatre;
 }
 

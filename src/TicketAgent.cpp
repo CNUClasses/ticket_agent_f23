@@ -31,10 +31,10 @@ int TicketAgent::selltickets(){
 
 	report("   Agent "+to_string(id)+" sold a ticket");
 
-	//try to enter a theatre
 	if(!t1.enter())
 		if(!t2.enter())
 			report("Oh No! cannot get in");
+
 	return 1;
 }
 
